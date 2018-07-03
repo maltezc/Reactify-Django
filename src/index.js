@@ -10,10 +10,8 @@ if (myComponent !== null) {
     ReactDOM.render(<App />, myComponent);
 }
 
-let myComponent2 = document.getElementById('reactify-django-ui-2')
-if (myComponent2 !==null) {
-    ReactDOM.render(<App/>, myComponent2)
-}
+
+
 
 // how react renders out app that we have created...which is a componentrendering out another component
 // registerServiceWorker();
