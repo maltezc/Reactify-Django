@@ -1,4 +1,8 @@
 import React, {Component} from 'react'
+import 'whatwg-fetch'
+import cookie from 'react-cookies'
+
+
 
 class PostCreate extends Component {
     constructor(props){
@@ -6,16 +10,42 @@ class PostCreate extends Component {
         super(props)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleInputChange = this.handleInputChange.bind(this)
-        state = {
+        this.state = {
             draft: false,
             title: null,
             content: null,
             publish: null,
             errors: {}
             }
-
     }
 
+    createPosts(data){
+        const endpoint = '/api/posts/'
+        const csrfToken = cookie.load('csrftoken')
+        let thisComp = this
+        if (csrfToken !== undefined){
+          let lookupOptions = {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFTOKEN': csrfToken
+            },
+            body: JSON.stringify(data),
+            credentials: 'include'
+        }
+
+
+        fetch(endpoint,lookupOptions)
+            .then(function (response) {
+                return response.json()
+            }).then(function (responseData) {
+                console.log(responseData)
+            }).catch(function (error) {
+                console.log("error", error)
+                alert("An error occurred, please try again")
+            })
+          }
+      }
 
 
 
@@ -30,6 +60,7 @@ class PostCreate extends Component {
             data['draft'] = false
         }
         console.log(data)
+        this.createPosts(data)
     }
 
     handleInputChange(event){
