@@ -11,6 +11,7 @@ class PostCreate extends Component {
         super(props)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleDraftChange = this.handleDraftChange.bind(this)
         this.clearForm = this.clearForm.bind(this)
         this.postTitleRef = React.createRef()
         this.postContentRef = React.createRef()
@@ -62,18 +63,11 @@ class PostCreate extends Component {
         // ^prevents typical action by form
         // console.log(this.state)
         let data = this.state
-        if (data['draft'] === 'on'){
-            data['draft'] = true
-        } else {
-            data['draft'] = false
-        }
-        console.log(data)
         this.createPosts(data)
     }
 
     handleInputChange(event){
         event.preventDefault()
-        console.log(event.target.name, event.target.value)
         let key = event.target.name
         let value = event.target.value
         if (key === 'title'){
@@ -83,6 +77,12 @@ class PostCreate extends Component {
         }
         this.setState({
             [key]: value
+        })
+    }
+
+    handleDraftChange(event){
+        this.setState({
+            draft: !this.state.draft
         })
     }
 
@@ -133,9 +133,10 @@ class PostCreate extends Component {
                 </div>
                 <div className='form-group'>
                     <label for='draft'>
-                    <input type='checkbox' name='draft' className='mr-2' onChange={this.handleInputChange}/>
+                    <input type='checkbox' checked={this.state.draft} name='draft' className='mr-2' onChange={this.handleDraftChange}/>
                     {/*ending slash above is KEY!!!!*/}
                      Draft</label>
+                    <button onClick={(event)=>{event.preventDefault(); this.handleDraftChange()}}>Toggle Draft</button>
                 </div>
                 <div className='form-group'>
                     <label for='publish'>Publish Date</label>
@@ -147,7 +148,7 @@ class PostCreate extends Component {
                            required='required'/>
                     {/*ending slash above is KEY!!!!*/}
                 </div>
-                <button className='btn btn-primary'>Save</button>
+                <button type='submit' className='btn btn-primary'>Save</button>
                 <button className='btn btn-secondary' onClick={this.clearForm}>Cancel</button>
 
             </form>
