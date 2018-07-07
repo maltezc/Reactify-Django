@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+
+
 
 class PostDetail extends Component {
     constructor(props) {
@@ -7,8 +10,6 @@ class PostDetail extends Component {
             slug:null
         }
     }
-
-
 
     componentDidMount(){
         this.setState({
@@ -27,7 +28,22 @@ class PostDetail extends Component {
     render() {
         const {slug} = this.state
         return (
-            <p>{(slug !== null ) ? <div>{slug}</div> : "Not Found"}</p>
+            <p>{(slug !== null ) ? <div>
+
+                {slug}
+
+
+                {/*<p className='lead'><Link maintainScrollPosition={false} to={{*/}
+{/*+                    pathname: `/posts`,*/}
+{/*+                    state: { fromDashboard: false }*/}
+{/*+                  }}>Posts</Link></p>*/}
+
+                <p className='lead'><Link maintainScrollPosition={false} to={{
+                     pathname: `/posts`,
+                     state: { fromDashboard: false }
+                   }}>Posts</Link></p>
+
+            </div> : "Not Found"}</p>
         )
     }
 }

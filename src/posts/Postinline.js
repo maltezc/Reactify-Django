@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom'
 
 
 class PostInline extends Component {
@@ -8,15 +8,27 @@ class PostInline extends Component {
       const {elClass} = this.props
       const showContent = elClass === 'card' ? 'de-block' : 'd-none'
 
-
     return (
-    <div>
-        {post !== undefined ? <div className={elClass}>
-            <h1>{post.title}</h1>
-            <p className={showContent}>{post.content}</p>
-            </div>
-            : ""}
-    </div>
+        <div>
+            {post !== undefined ? <div className={elClass}>
+
+                <h1><Link maintainScrollPosition={false} to={{
+                    pathname: `/posts/${post.slug}`,
+                    state: {fromDashboard: false}
+                }}>{post.title}</Link></h1>
+
+
+                {/*<h1><Link maintainScrollPosition={false} to={{*/}
+{/*+                   pathname: `/posts/${post.slug}`,*/}
+{/*+                   state: {fromDashboard: false}*/}
+{/*+               }}>{post.title}</Link></h1>*/}
+
+
+
+                <p className={showContent}>{post.content}</p>
+                </div>
+                : ""}
+        </div>
     );
   }
 }
