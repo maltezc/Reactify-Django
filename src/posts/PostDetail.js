@@ -1,5 +1,7 @@
 
 import React, {Component} from 'react'
+import 'whatwg-fetch'
+import cookie from 'react-cookies'
 import { Link } from 'react-router-dom'
 
 class PostDetail extends Component {
@@ -21,6 +23,15 @@ class PostDetail extends Component {
               'Content-Type': 'application/json'
           }
       }
+
+      const csrfToken = cookie.load('csrftoken')
+      if (csrfToken !== undefined) {
+          lookupOptions['credentials'] = 'include'
+          lookupOptions['headers']['X-CSRFToken'] = csrfToken
+
+      }
+
+
 
       fetch(endpoint, lookupOptions)
           .then(function (response) {
@@ -74,6 +85,8 @@ class PostDetail extends Component {
                     pathname: `/posts`,
                     state: { fromDashboard: false }
                   }}>Posts</Link></p>
+
+                {post.owner === true ? <div>Update Post</div> : ""}
                 </div>
                 }
            </div> : "Loading..."}</p>
