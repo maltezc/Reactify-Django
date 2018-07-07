@@ -19,7 +19,7 @@ class Posts extends Component {
     }
 
   loadPosts() {
-      const endpoint = '/api/posts'
+      const endpoint = '/api/posts/'
       let thisComp = this
       let lookupOptions = {
           method: "GET",
