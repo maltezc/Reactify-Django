@@ -1,49 +1,38 @@
-import React, { Component } from 'react'
+
+import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 
-
-
 class PostDetail extends Component {
-    constructor(props) {
+    constructor(props){
         super(props)
         this.state = {
-            slug:null
+             slug: null
         }
     }
-
     componentDidMount(){
         this.setState({
-            slug:null
-        })
-
-
-        if (this.props.match) {
+                slug: null
+            })
+        if (this.props.match){
             const {slug} = this.props.match.params
             this.setState({
-                slug:slug
+                slug: slug
             })
         }
     }
-
-    render() {
+    render(){
         const {slug} = this.state
-        return (
-            <p>{(slug !== null ) ? <div>
+        return(
+            <p>{(slug !== null) ? <div>
 
                 {slug}
 
-
-                {/*<p className='lead'><Link maintainScrollPosition={false} to={{*/}
-{/*+                    pathname: `/posts`,*/}
-{/*+                    state: { fromDashboard: false }*/}
-{/*+                  }}>Posts</Link></p>*/}
-
                 <p className='lead'><Link maintainScrollPosition={false} to={{
-                     pathname: `/posts`,
-                     state: { fromDashboard: false }
-                   }}>Posts</Link></p>
+                    pathname: `/posts`,
+                    state: { fromDashboard: false }
+                  }}>Posts</Link></p>
 
-            </div> : "Not Found"}</p>
+           </div> : "Not found"}</p>
         )
     }
 }
