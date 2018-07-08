@@ -5,7 +5,7 @@ import moment from 'moment'
 
 
 
-class PostUpdate extends Component {
+class PostForm extends Component {
     constructor(props){
     // {/^part2 of taking over action for submitting a form*/}
         super(props)
@@ -48,7 +48,6 @@ class PostUpdate extends Component {
                 if (thisComp.props.newPostItemCreated){
                     thisComp.props.newPostItemCreated(responseData)
                 }
-                thisComp.defaultState()
                 thisComp.clearForm()
             }).catch(function (error) {
                 console.log("error", error)
@@ -131,6 +130,7 @@ class PostUpdate extends Component {
             event.preventDefault()
         }
         this.postCreateForm.reset()
+        this.defaultState()
     }
 
     clearFormRefs() {
@@ -216,7 +216,7 @@ class PostUpdate extends Component {
                     {/*ending slash above is KEY!!!!*/}
                 </div>
                 <button type='submit' className='btn btn-primary'>Save</button>
-                <button className={`btn btn-secondary ${cancelClass}`} onClick={this.clearForm}>Cancel</button>
+                <button className={`btn btn-secondary`} onClick={this.clearForm}>Clear</button>
 
             </form>
         )
@@ -224,4 +224,4 @@ class PostUpdate extends Component {
 }
 
 
-export default PostUpdate
+export default PostForm
