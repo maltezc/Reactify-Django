@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import 'whatwg-fetch'
 import cookie from 'react-cookies'
 
-import PostCreate from './PostCreate'
+import PostUpdate from './PostUpdate'
 import PostInline from './Postinline'
 
 class Posts extends Component {
@@ -88,14 +88,13 @@ class Posts extends Component {
           }) : <p>No Posts Found</p>}
           {(csrfToken !== undefined && csrfToken !==null) ?
               <div className='my-5'>
-                  <PostCreate newPostItemCreated={this.handleNewPost}/>
+                  <PostUpdate newPostItemCreated={this.handleNewPost} />
               </div>
           : ""}
+
           {/*<PostInline title='Test Title' />*/}
           {/*title attribute is pulled from Postinline.js*/}
-          <div className='my-5'>
-              <PostCreate/>
-          </div>
+
       </div>
 
     );
